@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Invoked to let rows know they need to expand or collapse">
+    <aura:attribute name="isExpand" type="Boolean"/>
+</aura:event>

@@ -1,0 +1,32 @@
+<aura:component controller="ConfigurationLogAttachmentsCmp" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+	<!-- attributes -->
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="attachments" type="List" />
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="selectedRowsCount" type="Integer" default="0"/>
+    <aura:attribute name="selectedAttachments" type="List"/>
+    <aura:attribute name="isActive" type="boolean" default="true"/>
+    <aura:attribute name="attachmentExist" type="boolean" default="false"/>
+
+    <!-- handlers-->
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+
+    <div class="table-container">
+        <aura:if isTrue="{!v.attachmentExist}">
+        	<lightning:datatable class="table-style"
+            columns="{!v.columns}"
+            data="{!v.attachments}"
+            hideCheckboxColumn="false"
+            onrowselection="{!c.selectedRows}"
+            keyField="id"/>
+            <br/>
+            <div class="merge">
+                <lightning:button variant="Brand" label="Merge" title="Merge selected packages" onclick="{! c.merge }" disabled="{!v.isActive}"/>
+            </div>
+            <aura:set attribute="else">
+        		<p>Your Configuration Log record does not contain any package.xml files.</p>
+            </aura:set>
+        </aura:if>
+        
+    </div>
+</aura:component>

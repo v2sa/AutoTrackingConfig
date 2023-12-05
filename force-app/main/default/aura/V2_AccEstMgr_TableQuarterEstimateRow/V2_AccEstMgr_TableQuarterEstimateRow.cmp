@@ -1,0 +1,32 @@
+<aura:component controller="V2_AccEstimatesManager">
+    <aura:attribute name="AEMWrapper" type="object"/>
+    <aura:attribute name="accountIndex" type="Integer"/>
+    <aura:attribute name="quarterIndex" type="integer"/>
+    <aura:attribute name="channelIndex" type="integer"/>
+    <aura:attribute name="channelName" type="string"/>
+
+    <aura:attribute name="selYearQF" type="object"/>
+    <aura:attribute name="prevYearActualValue" type="Integer" default="0"/>
+    
+    
+    <aura:attribute name="BFSYear" type="string"/>
+    
+    <aura:attribute name="prevValue" type="decimal"/>
+        
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:registerEvent name="estimateChangedEvent" type="c:V2_AccEstMgr_EstimateChangedEvent"/>
+    
+	<div> 
+        <lightning:input type="number" maxlength="12"
+         formatter="decimal" disabled="{!v.selYearQF.Locked__c}" 
+         oncommit ="{!c.itemChange}" onfocus="{!c.savePrevValue}"
+         value="{!v.selYearQF.Quarterly_Estimate__c}"/>
+    </div>
+    <div style="height: 30px;line-height: 1.9rem;">
+        <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                                          value="{!v.prevYearActualValue}" 
+                                          style="decimal"/></span>
+    </div>
+    
+</aura:component>

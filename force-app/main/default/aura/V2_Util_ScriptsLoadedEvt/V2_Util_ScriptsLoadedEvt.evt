@@ -1,0 +1,2 @@
+<aura:event type="APPLICATION" description="Send scripts loaded event">
+</aura:event>

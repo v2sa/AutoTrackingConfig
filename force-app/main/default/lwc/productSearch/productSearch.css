@@ -1,0 +1,53 @@
+.line-seperator {
+    position:relative;
+    width:200px;
+    margin: auto;
+    top:50%;
+    
+}
+
+/*This is position the search button*/
+.search-button-position {
+    position: relative;
+    left: 50%;
+    bottom: 32px;
+}
+
+.backgroundInverse {
+    position: relative;
+    background-color: #16325c;
+    height: 80px;
+}
+.spinnerClass {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    /*margin:auto;*/
+    left: 47%;
+}
+
+
+.selected-products-table{
+    /*margin-bottom: 50px;*/
+}
+
+.overflow-table {
+    height:auto;
+    overflow-y:scroll;
+}
+
+.cell-height{
+    height: 103px;
+    overflow-y: scroll !important;
+}
+
+.button {
+    padding: 10px 80px 10px 80px;
+    margin: 10px;
+}
+
+.paginator {
+    position: relative;
+    right: 37%;
+}

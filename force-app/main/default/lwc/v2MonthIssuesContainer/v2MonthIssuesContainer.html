@@ -1,0 +1,56 @@
+<template>
+
+    <!-- ====== Years Accordions ====== -->
+    <lightning-accordion class="example-accordion"
+        allow-multiple-sections-open>
+        <!-- <lightning-accordion-section name={lastYear} label={lastYear}>
+            <div class="quater-label-container">
+                <span class="quater-label quater-label-margin-left">Q1</span>
+                <span class="quater-label">Q2</span>
+                <span class="quater-label">Q3</span>
+                <span class="quater-label">Q4</span>
+            </div>
+            <template for:each={monthIssueList.lastYear} for:item="monthIssue" for:index="index">
+                <c-v2-month-issue monthissue={monthIssue} key={monthIssue.productId}></c-v2-month-issue>
+            </template>
+           
+        </lightning-accordion-section> -->
+      
+        <lightning-accordion-section class="current-year" name={currentYear} label={currentYear}>
+            <a style="float: right;" onclick={clearMonthIssues} data-year="current">Clear all</a>
+
+            <div class="quater-label-container">
+                <span class="quater-label quater-label-margin-left">Q1</span>
+                <span class="quater-label">Q2</span>
+                <span class="quater-label">Q3</span>
+                <span class="quater-label">Q4</span>
+            </div>
+            <template for:each={monthIssueList.currentYear} for:item="monthIssue" for:index="index">
+                <c-v2-month-issue monthissueparam={monthIssue} key={monthIssue.productId} onselectmonthissue={setSelectedMonthIssue}></c-v2-month-issue>
+            </template>
+        </lightning-accordion-section>
+
+        <template if:true={productsInNextYear}>
+            <lightning-accordion-section class="next-year" name={nextYear} label={nextYear}>
+                <a style="float: right;" onclick={clearMonthIssues} data-year="next">Clear all</a>
+    
+                <div class="quater-label-container">
+                    <span class="quater-label quater-label-margin-left">Q1</span>
+                    <span class="quater-label">Q2</span>
+                    <span class="quater-label">Q3</span>
+                    <span class="quater-label">Q4</span>
+                </div>
+                <template for:each={monthIssueList.nextYear} for:item="monthIssue" for:index="index">
+                    <c-v2-month-issue monthissueparam={monthIssue} key={monthIssue.productId} onselectmonthissue={setSelectedMonthIssue}></c-v2-month-issue>
+                </template>
+            </lightning-accordion-section>
+        </template>
+    </lightning-accordion>
+<!-- ====== End Years Accordions ====== -->
+
+    <!-- <div class="amount-section">
+        <lightning-input type="number" label="Total Amount" formatter="currency"
+            step="0.01" value={totalAmount} onchange={setTotalAmount}>
+        </lightning-input>
+    </div> -->
+</template>

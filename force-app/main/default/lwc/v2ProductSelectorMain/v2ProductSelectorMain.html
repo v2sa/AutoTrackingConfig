@@ -1,0 +1,37 @@
+<template>
+    
+    <template if:true='{platformSelectionModalActive}'>
+        <c-v2-platform-selection onmodalclosed={handlePlatformSelectionModalClose} onlinessaved={handleLinesSaved}
+        recordid={recordId} opplineitems={olis} title={platformWindowHeader} iseditscreen={isEdit} waseditbuttonclicked={wasEditButtonClicked} caneditstatus={canEditStatus}></c-v2-platform-selection>
+    </template>
+
+    <article style="height: 100%;" class="slds-card slds-card_boundary forceBaseCard forceCard flexipageCard main-container">
+        <div class="slds-card__header slds-grid">
+            <div style="width:55%;">
+                <lightning-icon style="display: inline-block; margin-right: .75rem;" icon-name="standard:product" size="small" alternative-text="Notes"></lightning-icon>
+                <h2 style="display: inline; font-weight: 700;" class="slds-card__header-title slds-truncate slds-m-right--xx-small"
+                title="Product Selector">Products<span>&nbsp;({productCount})</span></h2>
+            </div>
+            
+            <div style="width:60%;">
+                <lightning-button if:true={containProducts} label="Edit Lines" title="Edit Lines" class="slds-m-left_x-small float-right" onclick={handleShowEditLineItemsContainer}></lightning-button>
+                <lightning-button label="Add Lines" title="Add Lines" class="slds-m-left_x-small float-right" onclick={handleShowPlatformSelection}></lightning-button>
+            </div>
+            
+        </div>
+        
+        <!-- Simple -->
+        <div class="slds-p-around_medium lgc-bg">
+            <lightning-datatable
+                key-field="id"
+                data={oliData}
+                columns={columns}
+                hide-checkbox-column
+                is-loading={tableLoadingState} 
+                class="slds-table slds-table_bordered slds-table_cell-buffer"
+                suppress-bottom-bar>
+            </lightning-datatable>
+    </div>
+</article>
+    
+</template>

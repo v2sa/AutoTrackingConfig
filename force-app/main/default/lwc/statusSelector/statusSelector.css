@@ -1,0 +1,11 @@
+.combox {
+    z-index: 99;
+}
+
+.slds-truncate {
+    overflow: auto !important;
+}
+
+.body-modal {
+    padding-bottom: 50px;
+}

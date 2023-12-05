@@ -1,0 +1,62 @@
+<template>
+    <div id="platform-selection-container" role="dialog" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container" style="max-width: unset; width: 60%;">
+            <div class="slds-modal__header">
+                <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close"
+                    onclick={closeModal}>
+                    <lightning-icon variant="inverse" icon-name="utility:close" size="x-small"
+                        alternative-text="Close icon"></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 id="header43" class="slds-text-heading--medium">{windowTitle}</h2>
+            </div>
+            <div id="modal-content" class="slds-modal__content slds-p-around--medium" style="height: 90%;">
+                <template if:true={savingChanges}>
+                    <lightning-spinner alternative-text="Loading" variant="brand" size="large"></lightning-spinner>
+                </template>
+                <template for:each={platforms} for:item="platform" for:index="index">
+                    <c-v2-platform sub-category-options={subCategoryOptions} 
+                    platformparam={platform} 
+                    key={platform.id}
+                    isedit={isEdit} 
+                    onplatformchanges={handlePlatformChanges} 
+                    recordid={recordid} 
+                    statusoptions={statusOptions} 
+                    caneditstatus={caneditstatus} 
+                    profile={currentProfile}
+                    userinfo={userInfo}
+                    permissions={permissions}>
+                    </c-v2-platform>
+
+                    <!-- <c-v2-platform platformparam={platform} key={platform.id} isedit={isEdit} onplatformchanges={handlePlatformChanges} recordid={recordid}></c-v2-platform> -->
+                </template>
+            </div>
+            <div class="slds-modal__footer">
+                <template if:false={isEdit}>
+                    <!-- Neutral variant (default) -->
+                    <lightning-button label="Cancel" title="Cancel" class="slds-m-left_x-small" onclick={closeModal}>
+                    </lightning-button>
+
+                    <template if:true={existOLIs}>
+                        <!-- Brand variant: Identifies the primary action in a group of buttons -->
+                        <lightning-button variant="brand" label="Next" title="Next" onclick={showEditLineItemModal}
+                            class="slds-m-left_x-small"></lightning-button>
+                    </template>
+                </template>
+                <template if:true={isEdit}>
+                    <!-- Neutral variant (default) -->
+                    <lightning-button label="Cancel" title="Cancel" class="slds-m-left_x-small" onclick={closeModal}>
+                    </lightning-button>
+                    <template if:false={waseditbuttonclicked}>
+                        <!-- Neutral variant (default) -->
+                        <lightning-button label="Platforms" title="Platforms" class="slds-m-left_x-small"
+                            onclick={showPlatformsModal}></lightning-button>
+                    </template>
+                    <lightning-button id="save-button" variant="brand" label="Save" title="Save" onclick={saveOpportunityLineItems} onmouseover={lostFocus}
+                        class="slds-m-left_x-small"></lightning-button>
+                </template>
+            </div>
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

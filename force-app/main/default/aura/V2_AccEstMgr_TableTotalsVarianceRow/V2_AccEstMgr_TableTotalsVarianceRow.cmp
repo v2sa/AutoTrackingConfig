@@ -1,0 +1,70 @@
+<aura:component >
+    <aura:attribute name="selYearEstimatesTotalPerQuartList" type="List" access="public"/>
+    <aura:attribute name="prevYearActualsTotalPerQuartList" type="List" access="public"/>
+ 	<aura:attribute name="baseYearTotal" type="Decimal" access="public"/>
+    <aura:attribute name="prevToBYActualsTotal" type="Decimal" access="public"/>
+    
+    <aura:attribute name="defaultSettings" type="object"/>
+    <aura:attribute name="totalVariance" type="Decimal" access="public"/>
+    <aura:attribute name="totalPercentageVari" type="Decimal" access="public"/>
+    <aura:attribute name="varianceList" type="List" access="public"/>
+    <aura:attribute name="variancePercList" type="List" access="public"/>
+    
+    <tr>           
+        <td style="max-width: 60px;width: 60px;">
+            <div style="width: 60px;display: inline-block;">
+                
+            </div>
+        </td>
+        <td style="min-width: unset; max-width: unset; width: unset;">
+            
+            <span><b>Variance</b></span>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;" 
+                 class="{!v.totalPercentageVari &lt;= v.defaultSettings.Red_Limit__c ? 'red' : v.totalPercentageVari &gt; v.defaultSettings.Yellow_Limit__c ? 'green' : 'yellow'}">                
+                <span>€<lightning:formattedNumber maximumFractionDigits = "0" value="{!v.totalVariance}" style="decimal"/></span>
+                <span> (<lightning:formattedNumber maximumFractionDigits = "0" value="{!v.totalPercentageVari}" style="decimal"/>%)</span>             
+            </div>            
+        </td>
+        <td>
+            <span><b>Selected|Prev</b></span>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;"
+                 class="{!v.variancePercList[0] &lt;= v.defaultSettings.Red_Limit__c ? 'red' : v.variancePercList[0] &gt; v.defaultSettings.Yellow_Limit__c ? 'green' : 'yellow'}"> 
+                <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.varianceList[0]}" 
+                    style="decimal"/></span>
+                <span> (<lightning:formattedNumber maximumFractionDigits = "0" value="{!v.variancePercList[0]}" style="decimal"/>%)</span>             
+            </div>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;"
+                 class="{!v.variancePercList[1] &lt;= v.defaultSettings.Red_Limit__c ? 'red' : v.variancePercList[1] &gt; v.defaultSettings.Yellow_Limit__c ? 'green' : 'yellow'}"> 
+                <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.varianceList[1]}" 
+                    style="decimal"/></span>
+                <span> (<lightning:formattedNumber maximumFractionDigits = "0" value="{!v.variancePercList[1]}" style="decimal"/>%)</span>   
+            </div>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;"
+                 class="{!v.variancePercList[2] &lt;= v.defaultSettings.Red_Limit__c ? 'red' : v.variancePercList[2] &gt; v.defaultSettings.Yellow_Limit__c ? 'green' : 'yellow'}"> 
+                <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.varianceList[2]}" 
+                    style="decimal"/></span>
+                <span> (<lightning:formattedNumber maximumFractionDigits = "0" value="{!v.variancePercList[2]}" style="decimal"/>%)</span>   
+            </div>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;"
+                 class="{!v.variancePercList[3] &lt;= v.defaultSettings.Red_Limit__c ? 'red' : v.variancePercList[3] &gt; v.defaultSettings.Yellow_Limit__c ? 'green' : 'yellow'}"> 
+                <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.varianceList[3]}" 
+                    style="decimal"/></span>
+                <span> (<lightning:formattedNumber maximumFractionDigits = "0" value="{!v.variancePercList[3]}" style="decimal"/>%)</span>   
+            </div>
+        </td>
+    </tr>
+</aura:component>

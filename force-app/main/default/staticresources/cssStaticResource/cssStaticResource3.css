@@ -1,0 +1,57 @@
+.visible-overflow .slds-truncate,
+.visible-overflow .slds-scrollable_y {
+    /* overflow: hidden; */
+}
+
+.visible-overflow .slds-table_header-fixed_container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.platform-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+
+/* .slds-button_icon-bare, .slds-button--icon-bare {
+    display: none;
+} */
+
+.slds-th__action-button {
+    display: none;
+}
+
+td.platform-disabled lightning-primitive-cell-editable-button {
+    display: none;
+}
+
+
+/*.slds-checkbox_faux {
+    margin-top: 8px;
+    margin-left: 40px;
+}*/
+
+
+/* This is for Account Assignment Manager solution*/
+.inactive-aa-preview {
+    color: red;
+    pointer-events: none;
+}
+
+.inactive-color {
+	color: red;
+}
+
+.edited-color {
+	color: orange;
+	font-weight: bold;
+}
+
+.inactive-aa-preview svg {
+	display: none;
+}
+
+.slds-truncate, .slds-scrollable_y {
+    overflow: visible;
+}

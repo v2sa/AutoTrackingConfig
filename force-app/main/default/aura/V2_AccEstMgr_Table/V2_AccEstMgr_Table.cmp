@@ -1,0 +1,95 @@
+<aura:component controller="V2_AccEstimatesManager">
+    <aura:attribute name="paginationSize" type="Integer" access="public"/>
+    
+    <aura:attribute name="quartersShown" type="List" access="public" default="['Q1', 'Q2', 'Q3', 'Q4']" />
+    <aura:attribute name="quartersMap" type="Map" access="public" 
+                    default="{ 'Q1' : 1, 'Q2' : 2, 'Q3' : 3, 'Q4' : 4}" />
+    
+    <aura:attribute name="LeftYear" type="Object" access="public"/>
+    <aura:attribute name="RightYear" type="Object" access="public"/>
+    
+    <aura:attribute name="SelectedAccountList" type="String" access="public" default="My Accounts"/>
+    <aura:attribute name="SelectedAccountName" type="String" access="public" default=""/>
+  
+    <aura:attribute name="recordsList" type="List" access="public"/>
+    <aura:attribute name="selYearEstimatesTotalPerQuartList" type="List" access="public"/>
+    <aura:attribute name="prevYearActualsTotalPerQuartList" type="List" access="public"/>
+        
+    <aura:attribute name="defaultSettings" type="object"/>
+        
+    <aura:attribute name="baseYearTotal" type="Decimal" access="public"/>
+    <aura:attribute name="prevToBYActualsTotal" type="Decimal" access="public"/>
+    <aura:attribute name="offset" type="Integer" access="private" default="0"/>
+    
+    <aura:attribute name="showViewMore" type="Boolean" access="private" default="0"/>
+
+    
+    <aura:handler event="c:V2_AccEstMgr_reloadTableEvent" action="{!c.reloadTable}"/>
+    <aura:handler event="c:V2_Util_ScriptsLoadedEvt" action="{!c.doInit}"/>
+    <aura:handler event="c:V2_AccEstMgr_EstimateChangedEvent" action="{!c.adjustTotalsRow}"/>
+   
+    <aura:registerEvent name="totalsEvent" type="c:V2_AccEstMgr_TotalsChangedEvent"/>
+    <aura:registerEvent name="collapseOrExpandEvent" type="c:V2_AccEstMgr_CollapseOrExpandRowsEvent"/>
+   
+    <div id="year-header-div" style="display: flex; margin-left: 1rem; width: 98%; height: 34px;" onmouseover="{!c.forceFocus}"> 
+        <div id="collapse-btns-section"
+             style="background-color: white;border: 1px solid rgb(217, 219, 221);border-right: none;width: calc(65% + 115px);text-align: center;">
+        	<lightning:button label="Expand All" class="expand-all"
+                              onclick="{!c.expandAll}" /> 
+            <lightning:button label="Collapse All" class="collapse-all"
+                              onclick="{!c.collapseAll}" /> 
+        </div>
+        <lightning:button label="" iconName="utility:back" aura:id="leftArrowBtn" onclick="{!c.leftArrowFunction}" iconPosition="left" /> 
+        <div id="year-headers" style="display: inline-block; width: 100%; border-radius: .25rem;">
+            <aura:if isTrue="{!v.LeftYear.quarters > 0}">
+                <div class="year-header" style="{!'width:'+v.LeftYear.width+'%;'}"><h1>{!v.LeftYear.year}</h1></div>
+            </aura:if>
+            <aura:if isTrue="{!v.RightYear.quarters > 0}">
+                <div class="year-header" style="{!'width:'+v.RightYear.width+'%;'}"><h1>{!v.RightYear.year}</h1></div>    
+            </aura:if>
+        </div>    
+        <lightning:button label="" iconName="utility:forward" onclick="{!c.rightArrowFunction}" iconPosition="right" />
+   
+    </div>
+    <lightning:spinner variant="brand" size="large" aura:id="mySpinner" class="slds-hide"/>
+    <div class="parent" style="margin-left: 1rem; width: 98%;">
+        <div class="element">
+            <table id="estimates-table" style="border: 1px solid rgb(217, 219, 221); border-top: none;" class="slds-table slds-table_bordered slds-table_cell-buffer">            
+                <thead>
+                    <tr class="slds-text-title--caps">
+                        <th style="width: 60px;" scope="col"></th>
+                        <th style="width: 18%;" scope="col">Account</th>
+                        <th style="width: 11%;" scope="col">Total</th>
+                        <th style="width: 11%;border-right: 1px solid rgb(217, 219, 221);" scope="col"></th>
+                        <aura:iteration items="{!v.quartersShown}" var="item" indexVar="index">
+                            <th style="width: 15%;" scope="col">{!item}</th>
+                        </aura:iteration>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                    <aura:if isTrue="{!not(empty(v.recordsList))}">   
+                        <c:V2_AccEstMgr_TableTotalsRow baseYear="{!v.defaultSettings.Base_Year__c}"
+                                                       baseYearTotal="{!v.baseYearTotal}"
+                                                       prevToBYActualsTotal="{!v.prevToBYActualsTotal}"
+                                                       selYearEstimatesTotalPerQuartList="{!v.selYearEstimatesTotalPerQuartList}" 
+                                                       prevYearActualsTotalPerQuartList="{!v.prevYearActualsTotalPerQuartList}" />
+                    </aura:if>
+                    <aura:if isTrue="{!not(empty(v.recordsList))}">   
+                        <c:V2_AccEstMgr_TableTotalsVarianceRow defaultSettings="{!v.defaultSettings}" baseYearTotal="{!v.baseYearTotal}"
+                                                       prevToBYActualsTotal="{!v.prevToBYActualsTotal}"
+                                                       selYearEstimatesTotalPerQuartList="{!v.selYearEstimatesTotalPerQuartList}" 
+                                                       prevYearActualsTotalPerQuartList="{!v.prevYearActualsTotalPerQuartList}" />
+                    </aura:if>
+                    <aura:iteration items="{!v.recordsList}" var="item" indexVar="index">
+                        <c:V2_AccEstMgr_TableRow baseYear="{!v.defaultSettings.Base_Year__c}" accountIndex="{!index}" AEMWrapper="{!item}" />
+                    </aura:iteration>                   
+                </tbody>
+            </table>
+        </div>        
+    </div>
+    
+    <aura:if isTrue="{!v.showViewMore}">
+        <div style="text-align: center; padding: 1rem 0;"><a onclick="{!c.viewMoreData}">View more</a></div>
+    </aura:if>
+    
+</aura:component>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Price_Book_Compact_Layout</fullName>
+    <fields>Name</fields>
+    <fields>Description</fields>
+    <fields>IsStandard</fields>
+    <fields>IsActive</fields>
+    <label>Price Book Compact Layout</label>
+</CompactLayout>

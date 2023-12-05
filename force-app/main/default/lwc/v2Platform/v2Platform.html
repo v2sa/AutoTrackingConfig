@@ -1,0 +1,114 @@
+<template>
+
+        <div style="position:relative;" class={displayClass}>
+                <lightning-accordion class="example-accordion"
+                    allow-multiple-sections-open>
+                    <lightning-accordion-section name={platform.name} label={platform.name}>
+                        <div class={platformState}>
+                               <!-- Neutral variant (default) -->
+                               <template if:true={isedit}>
+                                   <template if:true={displayMarkBookedButton}>
+                                        <!-- <lightning-button label="Mark all Booked" title="Non-primary action" onclick={markAllBooked} class="slds-m-left_x-small" data-status="Booked"></lightning-button> -->
+                                        <lightning-button label="Mark as Booked" title="Non-primary action" onclick={markStatust} class="slds-m-left_x-small" data-status="Booked"></lightning-button>
+                                   </template>
+                                    <!-- <lightning-button label="Mark as Lost" title="Non-primary action" onclick={markLost} class="slds-m-left_x-small" data-status="Lost/Dead"></lightning-button> -->
+                                    <lightning-button label="Mark as Lost" title="Non-primary action" onclick={markStatust} class="slds-m-left_x-small" data-status="Lost/Dead"></lightning-button>
+                               </template>
+
+                                <template if:false={platform.isProgram}>
+                                        <div class={displaySelection}>
+                                            <c-v2-month-issues-container
+                                            monthissueproducts={platform.products} 
+                                            existingolis={platform.oliList} 
+                                            onselectmonthissue={setSelectedMonthIssue} 
+                                            ontotalamountchange={calculateAndSplitTotalAmount}
+                                            profile={profile}
+                                            permissions={permissions}></c-v2-month-issues-container>
+                                            <template if:true={displayMultiSelectPicklist}>
+                                                <c-v2-multi-select-picklist msoptions={getSubCategoryOptions} onchange={handleChangeSubCategory}>
+                                                </c-v2-multi-select-picklist>
+                                            </template>
+
+                                            
+                                        </div>
+                                        <div class={displayEdit}>
+                                            <div class="slds-p-around_medium lgc-bg" style="height: 300px">
+
+                                                <lightning-datatable
+                                                    key-field="id"
+                                                    data={allOLIsList}
+                                                    columns={monthIssueCols}
+                                                    is-loading={tableLoadingState} 
+                                                    class="slds-table slds-table_bordered slds-table_cell-buffer visible-overflow"
+                                                    oncellchange={handleRowAction}
+                                                    onrowselection={getSelectedRows}
+                                                    suppress-bottom-bar>
+                                                </lightning-datatable>
+
+                                                <div>
+                                                    <span>Running {platform.name} Total: <lightning-formatted-number format-style="currency" currency-code="USD" value={runningTotal} maximum-fraction-digits="0" minimum-fraction-digits="0"></lightning-formatted-number></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </template>
+            
+                                <template if:true={platform.isProgram}>
+                                    <div class={displaySelection}>
+                                        <c-v2-platform-program-container existingprogramolis={platform.oliList} platformname={platform.name} opportunityid={recordid}
+                                        onprogramselectionchange={handleProgramSelectionChange}></c-v2-platform-program-container>
+
+                                        <template if:true={displayMultiSelectPicklist}>
+                                            <c-v2-multi-select-picklist msoptions={getSubCategoryOptions} onchange={handleChangeSubCategory}>
+                                            </c-v2-multi-select-picklist>
+                                        </template>
+                                    </div>
+
+                                    <div class={displayEdit}>
+                                        <div class="slds-p-around_medium lgc-bg" style="height: 300px">
+
+                                            <lightning-datatable
+                                                key-field="id"
+                                                data={allOLIsList}
+                                                columns={productProgramCols}
+                                                is-loading={tableLoadingState} 
+                                                class="slds-table slds-table_bordered slds-table_cell-buffer visible-overflow"
+                                                oncellchange={handleRowAction}
+                                                onrowselection={getSelectedRows}
+                                                suppress-bottom-bar>
+                                            </lightning-datatable>
+        
+                                            <div>
+                                                <span>Running {platform.name} Total: <lightning-formatted-number format-style="currency" currency-code="USD" value={runningTotal} maximum-fraction-digits="0"></lightning-formatted-number></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template if:false={platformIsMagazineOrLive}>
+                                    <div class={displaySelection}>
+                                        <lightning-input pattern="[0-9]*" 
+                                                label={amountLabel}
+                                                value={totalAmount}
+                                                onchange={setTotalAmount}
+                                                step="0"
+                                                formatter="currency"
+                                                min="0"                                
+                                            >
+                                        </lightning-input>
+                                    </div>
+                                </template>
+                        </div>
+
+                    </lightning-accordion-section>
+                
+                    <div class="slds-form-element toggle-button">
+                        <label class="slds-checkbox_toggle slds-grid">
+                            <input type="checkbox" name="checkbox-toggle-13" value="checkbox-toggle-13" checked={isCheckedState} aria-describedby="checkbox-toggle-13" onclick={setPlatformState}/>
+                            <span class="slds-checkbox_faux_container" aria-live="assertive">
+                                <span class="slds-checkbox_faux"></span>
+                            </span>
+                        </label>
+                    </div>
+                </lightning-accordion>
+            </div>
+    
+</template>

@@ -1,0 +1,44 @@
+<template>
+    <lightning-card title="Pipeline Manager" icon-name="standard:opportunity" variant="base">
+        <div slot="actions">
+            <lightning-button class="slds-theme_neutral" variant="neutral" label="Add Pipeline Products" onclick={handleShowModal}></lightning-button>
+        </div>
+        <div slot="footer">
+            <template if:false={data}>
+                <div>
+                    <p>There are no products to display.</p>
+                </div>
+            </template>
+            
+        </div>
+        <div class="slds-card__body_inner spacing-body">
+            <div class="slds-text-align_right" style="font-size: 0.8125rem;">
+                <!-- Show the sum of the total amount of Pipeline_Product_Line_Item__c -->
+                <p><strong>Running Total:</strong> <lightning-formatted-number value={totalAmount} format-style="currency" currency-code="USD"></lightning-formatted-number> (excludes 'Lost')<br/><br/></p>
+            </div>
+            <div class="scrolling-action">
+                <lightning-datatable
+                    hide-checkbox-column=true
+                    key-field="Id"
+                    data={data}
+                    columns={columns}
+                    onsave={handleSave2}
+                    draft-values={draftValues}
+                    onrowaction={callRowAction}>
+                </lightning-datatable>
+            </div>
+            
+            <!--Paginator for the table-->
+            <!--<c-paginator></c-paginator>-->
+            <template if:true={showModal}>
+                <c-product-modal record-id={recordId} onclosemodal={handleCloseModal} onrefreshtableevt={handleRefreshTableEvt}></c-product-modal>
+            </template>
+            <template if:true={openMonthSelector}>
+                <c-month-selector oncancel={handleCancel}></c-month-selector>
+            </template>
+            <template if:true={showStatusSelector}>
+                <c-status-selector options={statusOptions} onstatuscancel={handleStatusCancel} onsavestatus={handleSaveStatus}></c-status-selector>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,38 @@
+.main-aa-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.slds-th__action-button {
+    display: none;
+}
+
+
+.preview-container .visible-overflow .slds-table_header-fixed_container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.preview-container .slds-truncate, .preview-container .slds-scrollable_y {
+    overflow: visible;
+}
+
+
+.inactive-aa-preview {
+    color: red;
+    pointer-events: none;
+}
+
+.inactive-color {
+    color: red;
+}
+
+.edited-color {
+    color: orange;
+    font-weight: bold;
+}
+
+.inactive-aa-preview svg {
+    display: none;
+}
+

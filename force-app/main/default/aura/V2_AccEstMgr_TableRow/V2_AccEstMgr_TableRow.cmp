@@ -1,0 +1,94 @@
+<aura:component controller="V2_AccEstimatesManager">    
+   	<!-- record -->
+    <aura:attribute name="AEMWrapper" type="object"/>
+    <aura:attribute name="accountIndex" type="Integer"/>
+    <aura:attribute name="isOpen" type="Integer"/>
+    <aura:attribute name="baseYear" type="Integer" access="public" default="0"/>
+    
+    <aura:handler event="c:V2_AccEstMgr_CollapseOrExpandRowsEvent" action="{!c.collapseOrExpand}"/>
+    
+    <tr> 
+        <td style="max-width: 60px;width: 60px;">
+            <div style="width: 60px;display: inline-block;">
+                 <lightning:button class="collapsing-arrow" label="{!v.isOpen ? '▼' : '►' }" 
+                                  onclick="{! c.toggleQuarterForecastSection }"/>
+            </div>
+        </td>
+        <td style="min-width: unset; max-width: unset; width: unset;">
+            <span style = "white-space: normal;">
+                {!v.AEMWrapper.accountName}
+            </span>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;"> 
+                <span><b>{!v.baseYear} : </b>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.AEMWrapper.baseYearTotal}" 
+                    style="decimal"/></span>
+            </div>  
+            <div style="height: 29px;line-height: 1.6rem;">
+                 <span><b>{!v.baseYear - 1} : </b>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.AEMWrapper.prevToBYActualsTotal}" 
+                    style="decimal"/></span>
+            </div>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;font-weight: bold;">Selected Year
+            </div>
+            <div style="height: 29px;line-height: 1.6rem;font-weight: bold;">Previous Year
+            </div>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;"> 
+                <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.AEMWrapper.listPlanSnapshots[0].quarterTotal}" 
+                    style="decimal"/></span>
+            </div>  
+            <div style="height: 29px;line-height: 1.6rem;">
+                 <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.AEMWrapper.listPlanSnapshots[0].PYActualsTotPerQuarter}" 
+                    style="decimal"/></span>
+            </div>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;"> 
+                <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.AEMWrapper.listPlanSnapshots[1].quarterTotal}" 
+                    style="decimal"/></span>
+            </div>  
+            <div style="height: 29px;line-height: 1.6rem;">
+                 <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.AEMWrapper.listPlanSnapshots[1].PYActualsTotPerQuarter}" 
+                    style="decimal"/></span>
+            </div>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;"> 
+                <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.AEMWrapper.listPlanSnapshots[2].quarterTotal}" 
+                    style="decimal"/></span>
+            </div>  
+            <div style="height: 29px;line-height: 1.6rem;">
+                 <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.AEMWrapper.listPlanSnapshots[2].PYActualsTotPerQuarter}" 
+                    style="decimal"/></span>
+            </div>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;"> 
+                <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.AEMWrapper.listPlanSnapshots[3].quarterTotal}" 
+                    style="decimal"/></span>
+            </div>  
+            <div style="height: 29px;line-height: 1.6rem;">
+                 <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.AEMWrapper.listPlanSnapshots[3].PYActualsTotPerQuarter}" 
+                    style="decimal"/></span>
+            </div>
+        </td>
+    </tr>
+    <aura:if isTrue="{!v.isOpen}">
+        <c:V2_AccEstMgr_TableQuarterRow baseYear = "{!v.baseYear}" accountIndex = "{!v.accountIndex}"
+                                        AEMWrapper="{!v.AEMWrapper}" />
+    </aura:if>
+
+</aura:component>

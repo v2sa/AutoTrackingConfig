@@ -1,0 +1,11 @@
+.toggle-button {
+    position: absolute;
+    left: 20%;
+    top: 2%;
+}
+
+.platform-disabled{
+    background-color: lightgray;
+    pointer-events: none;
+    opacity: 0.5;
+}

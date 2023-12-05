@@ -1,0 +1,176 @@
+.THIS .buttonConfig {
+    position: relative;
+    top: 85%;
+    left: 10%;
+}
+
+.THIS .dateInputs {
+    position: relative;
+    top: 12%;
+}
+
+.THIS .radioOptions{
+    position: relative;
+    top: 10%;
+}
+
+.THIS .userInput{
+    position: relative;
+    top: 21%;
+    width: 70%;
+}
+
+.THIS .componentTable{
+    position:relative;
+    top: 40px;
+    height: 500px;
+    overflow-y:auto;
+}
+
+.THIS .searchCriteria{
+    position:relative;
+    top:20px;
+}
+
+.THIS .projectSelection{
+    position: relative;
+    top:10%;
+    width: 50%;
+}
+
+.THIS .projectNarrativeInput {
+    position:relative;
+    top: 20px;
+    width: 50%;
+}
+
+.THIS .positionComponents{
+    margin-left: 20px;   
+    position: relative;
+    top: 20px; 
+}
+
+.THIS .card{
+    height:100%;
+}
+
+.THIS .warningMessageStyle{
+    position: relative;
+    bottom: 40px;
+    left: 30%;
+    width: 40%;
+}
+
+.THIS .searchIcon{
+    top: -3px !important;
+}
+
+.THIS .successMessage{
+    position:relative;
+    width:500px;
+    height:auto;
+    border:1px #008035 solid;
+    left: 30%;
+    bottom: 20px;
+    background-color:#008035;
+    color: #ffffff;
+    padding: 5px;
+    
+}
+
+.THIS .slds-notify__close{
+    position: relative;
+    top: 50%;
+    float: right !important;
+}
+
+.THIS .backgroundInverse {
+    position: relative;
+    background-color: #16325c;
+    height: 500px;
+}
+
+.THIS .searchOptions {
+    position: relative;
+    right: 1%;
+}
+
+/**For screen less than 942px */
+@media only screen and (max-width: 942px){
+    .THIS .searchOptions {
+        position: relative;
+        right: 430px;
+        top: 265px;
+    }
+
+    .THIS .componentTable {
+        position: relative;
+        top: 348px;
+    }
+
+    .THIS .buttonOptions {
+        position: relative;
+        top: 286px;
+    }
+}
+/**For screen less than 810px */
+@media only screen and (max-width: 810px){
+    .THIS .buttonOptions {
+        position: relative;
+        top: 341px;
+        right: 853px;
+    }
+
+    .THIS .buttonConfig {
+        position: relative;
+        top: 260px;
+        width: 302px;
+    }
+
+    .THIS .componentTable {
+        position: relative;
+        top: 413px;
+    }
+    
+    .THIS .userInput {
+        position: relative;
+        top: 21%;
+        width: 318px;
+    }
+
+    .THIS .input-size-small {
+        position:relative;
+        width: 318px;;
+    }
+}
+
+/**For screen greater than 1814px */
+@media only screen and (min-width: 1814px) {
+    
+    .THIS .buttonConfig {
+        position: relative;
+        top: 85%;
+        /* left: 50%; */
+    }
+}
+
+.THIS .sectionStyle {
+    position: relative;
+    top: 40px;
+}
+
+.THIS .sectionContentStyle {
+    position: relative;
+    bottom: 20px;
+}
+
+.THIS .sectionTitle {
+    font-size: 24px;
+}
+
+.THIS .projectNarrativeLabel {
+    color:#6b6d70;
+    font-size: 12px;
+    position: relative;
+    top: 16px;
+}

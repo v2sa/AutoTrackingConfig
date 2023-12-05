@@ -1,0 +1,72 @@
+<template>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+        <div class="slds-modal__container">
+          <header class="slds-modal__header">
+            <!-- <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+              <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+              </svg>
+              <span class="slds-assistive-text">Close</span>
+            </button> -->
+            <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Month Selector
+
+              <div class="align-year">
+                <!--This is for the decrement button-->
+                <template if:true={showPrevious}>
+                  <lightning-button variant="base" label="" 
+                    title="Download action with base variant" 
+                    icon-name="utility:chevronleft" 
+                    class="slds-m-left_x-small"
+                    onclick={decrementYear}>
+                </lightning-button>
+                </template>
+                Year {year} 
+                <!--The increment button-->
+                <lightning-button variant="base" label="" 
+                  icon-name="utility:chevronright" 
+                  class="slds-m-left_x-small"
+                  onclick={incrementYear}>
+              </lightning-button>
+              </div>
+            </h2>
+            
+          </header>
+          <template if:true={showConfirmation}>
+            <c-confirmation-page oncloseconfirmation={closeConfirmation} onsaveconfirmation={handleSaveConfirmation}></c-confirmation-page>
+          </template>
+          <template if:false={showConfirmation}>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+              <div class="month-container">
+                  <div class="grid">
+                    <lightning-button label="JAN" title="JAN" onclick={onClickMonthHandler} class=" button JAN"></lightning-button>
+                    <lightning-button label="MAY" title="MAY" onclick={onClickMonthHandler} class=" button MAY"></lightning-button>
+                    <lightning-button label="SEP" title="SEP" onclick={onClickMonthHandler} class=" button SEP"></lightning-button>
+                  </div>
+                  <div class="grid">
+                    <lightning-button label="FEB" title="FEB" onclick={onClickMonthHandler} class=" button FEB"></lightning-button>
+                    <lightning-button label="JUN" title="JUN" onclick={onClickMonthHandler} class=" button JUN"></lightning-button>
+                    <lightning-button label="OCT" title="OCT" onclick={onClickMonthHandler} class=" button OCT"></lightning-button>
+                  </div>
+                  <div class="grid">
+                    <lightning-button label="MAR" title="MAR" onclick={onClickMonthHandler} class=" button MAR"></lightning-button>
+                    <lightning-button label="JUL" title="JUL" onclick={onClickMonthHandler} class=" button JUL"></lightning-button>
+                    <lightning-button label="NOV" title="NOV" onclick={onClickMonthHandler} class=" button NOV"></lightning-button>
+                  </div>
+                  <div class="grid">
+                    <lightning-button label="APR" title="APR" onclick={onClickMonthHandler} class=" button APR"></lightning-button>
+                    <lightning-button label="AUG" title="AUG" onclick={onClickMonthHandler} class=" button AUG"></lightning-button>
+                    <lightning-button label="DEC" title="DEC" onclick={onClickMonthHandler} class=" button DEC"></lightning-button>
+                  </div>
+              </div>
+            </div>
+          </template>
+          
+          <footer class="slds-modal__footer">
+            <lightning-button variant="neutral" label="Cancel" title="Cancel" onclick={handleCancel} ></lightning-button>
+            <lightning-button variant="brand" label="Save" title="Save" onclick={hanldeSave} class="slds-m-left_x-small"></lightning-button>
+          </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+    
+</template>

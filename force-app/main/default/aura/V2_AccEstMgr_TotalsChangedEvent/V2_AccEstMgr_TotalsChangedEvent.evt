@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="Invoked to let totals component know it needs to reload">
+    <aura:attribute name="baseYearEstimatesTotal" type="Decimal"/>
+    <aura:attribute name="prevToBYActualsTotal" type="Decimal"/>
+    <aura:attribute name="totalsVariance" type="Decimal"/>
+</aura:event>

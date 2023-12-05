@@ -1,0 +1,135 @@
+.THIS h1{
+    font-weight: bold ;
+    text-align: left;
+    font-size: 32px;
+    padding:12px 0px 12px 0px;
+    text-decoration: underline;
+}
+
+.THIS h2 {
+    font-weight: bold;
+    text-align:left;
+    font-size:24px;
+    padding:12px 0px 12px 0px;
+}
+
+.THIS p {
+    font-size: 16px;
+    padding: 5px;
+}
+
+.THIS .spacing{
+    padding:12px 0px 12px 0px;    
+}
+
+.THIS .listDecimal {
+    list-style-type:decimal;
+}
+
+.THIS .listDisc {
+    list-style-type:disc;
+}
+
+.THIS ul {
+    margin-left: 15px;
+    font-size: 16px;
+    
+}
+
+.THIS .li-indenting{
+    position:relative;
+    left: 50px;
+}
+
+.THIS .backgroundText {
+    background-color: #f3f2f2;
+    border-radius: 10px;
+}
+
+.THIS .spacingDiv {
+    padding: 5px;
+}
+
+.THIS .scrolling{
+    height: 1000px;
+    overflow-y: auto;
+}
+
+.THIS .titleHeader {
+    font-family: "Ubuntu";
+    font-weight: bold;
+    text-decoration:none;
+    color: #ffffff;
+    text-align:center;
+    font-size: 60px;
+}
+
+.THIS .headerDiv{
+    width: 105%;
+    height: 114px;
+    position: relative;
+    bottom: 16px;
+    right: 16px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.THIS .img-spacing{
+    padding: 10px 0px 10px 0px;
+}
+
+.THIS.slds-vertical-tabs {
+    border: none !important;
+}
+
+.THIS .center-text{
+    text-align:center;
+}
+
+.THIS .description-context{
+    margin: auto;
+    width:70%;
+    text-align:center;
+
+}
+
+.THIS .bold-text{
+    font-weight:bold;
+}
+
+.THIS .home-page {
+    position:relative;
+    height:auto;
+}
+
+.THIS .logo-container{
+    position: relative;
+    bottom: 114px;
+    z-index: 1;
+    height: 114px;
+    width: 152px;
+    background-color: grey;
+    left:34px;
+}
+
+@media only screen and (max-width: 715px){
+    .THIS .logo-container{
+        position: relative;
+        bottom: 204px;
+        z-index: 1;
+        height: 114px;
+        width: 152px;
+        background-color: grey;
+        left:34px;
+    }   
+}
+
+.THIS .logo-image {
+    position: relative;
+    /* bottom: 31px; */
+    z-index: 1;
+    height: 62px;
+    width: 152px;
+    /* background-color: grey; */
+    top: 25px;
+}

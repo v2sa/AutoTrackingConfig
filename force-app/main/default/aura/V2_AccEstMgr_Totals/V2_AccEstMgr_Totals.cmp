@@ -1,0 +1,33 @@
+<aura:component>
+    <aura:attribute name="baseYearEstimatesTotal" type="Decimal" access="public" default="0"/>
+    <aura:attribute name="prevToBYActualsTotal" type="Decimal" access="public" default="0"/>
+    <aura:attribute name="totalsVariance" type="Decimal" access="public" default="0"/>
+  	<aura:attribute name="percentageVariance" type="Decimal" access="public" default="0"/>
+    
+    <aura:handler event="c:V2_AccEstMgr_TotalsChangedEvent" action="{!c.updateValues}"/>
+   	<aura:handler event="c:V2_AccEstMgr_EstimateChangedEvent" action="{!c.adjustTotals}"/>
+   	
+    <aura:attribute name="defaultSettings" type="object"/>
+    
+	<div style="float: right; width: 37%;margin-right: 8px;">
+        <div style="width: 100%;border: 1px solid rgb(217, 219, 221);display: inline-block;border-radius: .25rem;background-color: white;margin-top: 1rem;margin-bottom:1rem;padding: 1rem;font-size: 1.3rem;">
+            <div>
+                <label class="total-labels">{!v.defaultSettings.Base_Year__c} Total Estimates:  </label>
+                <span>€<lightning:formattedNumber maximumFractionDigits = "0" value="{!v.baseYearEstimatesTotal}" style="decimal"/></span>
+            </div>
+            <br/>
+            <div>    
+                <label class="total-labels">{!v.defaultSettings.Base_Year__c - 1} Total Actuals:  </label>
+                <span>€<lightning:formattedNumber maximumFractionDigits = "0" value="{!v.prevToBYActualsTotal}" style="decimal"/></span>
+            </div>
+            <br/>
+            <div>    
+                <label class="total-labels">Variance:  </label>
+                <span class="{!v.percentageVariance &lt;= v.defaultSettings.Red_Limit__c ? 'red' : v.percentageVariance &gt; v.defaultSettings.Yellow_Limit__c ? 'green' : 'yellow'}">
+                    <span>€<lightning:formattedNumber maximumFractionDigits = "0" value="{!v.totalsVariance}" style="decimal"/></span>
+                	<span> (<lightning:formattedNumber maximumFractionDigits = "2" value="{!v.percentageVariance}" style="decimal"/>%)</span>
+                </span>                
+            </div>
+        </div>
+    </div>
+</aura:component>

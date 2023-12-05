@@ -1,0 +1,37 @@
+.quater-label-container {
+    display: inline-block;
+    width: 100%;
+    
+}
+
+.quater-label {
+    display: inline-block;
+    margin-right: 111px;
+}
+
+.quater-label-margin-left {
+    margin-left: 52px;
+}
+
+.slds-accordion__summary-heading h2 {
+    font-weight: 900;
+}
+
+.amount-section {
+    display: block;
+    width: 100%;
+}
+
+.platform-blocked{
+    background-color: lightgrey;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.slds-accordion__summary {
+    display: inline-block;
+}
+
+.slds-accordion__content {
+    display: inline;
+}

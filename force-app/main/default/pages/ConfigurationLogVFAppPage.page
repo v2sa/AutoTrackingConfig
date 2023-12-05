@@ -1,0 +1,65 @@
+<apex:page controller="ConfigurationLogVFPageController" showHeader="false" applyHtmlTag="false" lightningStylesheets="true">     
+   <head>
+        <apex:stylesheet value="{!URLFOR($Resource.stylesheet, '')}"/>
+        <style>
+            .slds-form-element__icon:hover::after >  .slds-popover_tooltip {
+                display:none;
+            }
+        </style>
+    </head>
+    
+    <apex:includeLightning />
+    
+    <!-- Page code -->
+    <apex:form >
+		<apex:inputhidden id="tableData" value="{!jsonData}"/>    
+		<apex:inputhidden id="configLogId" value="{!configLogId}"/> 
+        
+    	<apex:actionfunction name="jsGeneratePDF" action="{!downloadPDF4}"/> 
+        <!-- Create a JS function with the "name" attribute that executes the Apex function in the "action" attribute -->
+        
+        
+        <div id="lightning"/>
+       
+            
+        <script>
+            function saveData(data, callback) {
+                var dataParsed = JSON.parse(data);
+                
+                var tableData = document.getElementById('{!$Component.tableData}');
+                tableData.value = JSON.stringify(dataParsed.ConfigurationLogTable);
+
+                var configLogId = document.getElementById('{!$Component.configLogId}');
+                configLogId.value = dataParsed.ConfigurationLogId; 
+                
+                // Invoke PDF Generation (Or Download?)
+                
+                jsGeneratePDF();
+
+                //invoke callback;
+                if(typeof callback == 'function') callback();
+            }
+        
+            function loadComponents() {
+                    $Lightning.use("c:configurationLogApp", function() {
+                        $Lightning.createComponent("c:configurationLogCmp",
+                        { 
+                            sessionId : '{!$Api.Session_ID}',
+                            printPDF : saveData
+                        },
+                        "lightning",
+                        function(cmp) {
+                            // do some stuff
+                            console.log("THE CMP",cmp);
+                            
+                            console.log(cmp.find("slds-popover"))
+                        });
+                    });
+                }
+                
+            loadComponents();
+        </script>
+        
+
+    </apex:form>
+</apex:page>

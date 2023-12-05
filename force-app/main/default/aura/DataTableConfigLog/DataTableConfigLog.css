@@ -1,0 +1,16 @@
+.THIS{
+    
+}
+
+.THIS.table-container{
+    border: 1px solid rgba(215, 218, 233, 1);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.THIS .merge{
+    width: 100%;
+    display:flex; 
+  	justify-content:flex-end; 
+  	align-items:center;  
+}

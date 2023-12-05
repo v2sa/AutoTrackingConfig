@@ -1,0 +1,8 @@
+<aura:event type="APPLICATION" description="Invoked to let components know an estimate changed">
+    <aura:attribute name="accountIndex" type="Integer"/>
+    <aura:attribute name="quarterIndex" type="Integer"/>
+    <aura:attribute name="channelIndex" type="Integer"/>
+    <aura:attribute name="BFSYear" type="Integer"/>
+    <aura:attribute name="prevValue" type="Decimal"/>
+    <aura:attribute name="newValue" type="Decimal"/>
+</aura:event>

@@ -1,0 +1,122 @@
+<template>
+
+    <template if:true={loadingSearch}>
+        <div class="spinnerClass">
+            <lightning-spinner alternative-text="Loading"  size="large"></lightning-spinner>
+        </div>
+    </template>
+    <template if:false={loadingSearch}>
+        <lightning-card title="Pipeline Product Search" icon-name="standard:opportunity" variant="base">
+            <div slot="actions">
+                <!--<lightning-button class="slds-theme_neutral" variant="neutral" label="Close"></lightning-button>-->
+            </div>
+            <div slot="footer">
+                
+                <div class="slds-text-heading_small slds-text-align_left">
+                    <p><strong>Selected Products </strong></p>
+                </div>
+                <!--The table for the SELECTED PRODUCTS-->
+                <div style={styleHeight} class="selected-products-table">
+                    <c-product-selector-datatable 
+                        key-field="Id" 
+                        hide-checkbox-column 
+                        resize-column-disabled
+                        columns={columnsSelected} 
+                        suppress-bottom-bar data={dataSelected} 
+                        errors={selectedTableErrors}
+                        ondeleterow={handleDeleteRow} 
+                        onshowdatemodal={handleshowDateModal} 
+                        show-row-number-column
+                        oninputevent={handleInputEvent} 
+                        oncomboboxchange={handleInputEvent}>
+                    </c-product-selector-datatable>
+                    <template if:true={emptyDataSelected}>
+                        <div>
+                            <p>No Records Selected</p>
+                        </div>
+                    </template>
+                </div>
+                <br/><br/><br/><br/><br/><br/><br/><br/>
+                <br/><br/><br/><br/><br/><br/><br/><br/>
+            </div>
+            <div class="slds-card__body_inner">
+                <lightning-layout class="slds-m-bottom_x-small slds-wrap" multiple-rows="true">
+                    <lightning-layout-item size="6">
+                        <div>
+                            <p>Enter the pipeline product you're searching for here.</p>
+                        </div>
+                        <div onkeypress={handleOSearchnKeyPress}>
+                            <lightning-input class="searchInput slds-size_1-of-2 slds-p-right_none slds-p-left_none"
+                                label="Product Search" type="text" variant="standard"></lightning-input>
+                        </div>
+                        <lightning-button class="search-button-position slds-theme_neutral" variant="neutral"
+                            label="Search" onclick={handleClick}></lightning-button>
+                        <!--The paginator-->
+                        <div class="paginator">
+                            <p><c-paginator the-page-size={recordAmount}></c-paginator></p>
+                            <!--<p>First | Previous | <strong>Page 3 of 5</strong> | Next | Last </p>-->
+                            <!--<p><br /></p>-->
+                        </div>
+                        <!--Line seperator-->
+                        <!--<div>
+                            
+                            <hr class="line-seperator">
+                        </div>-->
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6">
+                        <div>
+                            <p>Search Filters</p>
+                        </div>
+                        <lightning-combobox class="brandCombobox" label="Brands" options={brandOptions} value={defaultBrand}
+                            placeholder="Please select a brand" dropdown-alignment="left" variant="standard"
+                            onchange={handleBrandChange}></lightning-combobox>
+                        <lightning-combobox class="platformCombobox" label="Plaforms" options={platformOptions} value="--None--"
+                            placeholder="Please select a platform" dropdown-alignment="left" variant="standard"
+                            onchange={handleFamilyChange}></lightning-combobox>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <!--The DIV for the Search of the Products-->
+                <div>
+                    <template if:true={loadingData}>
+                        <div class="backgroundInverse">
+                            <lightning-spinner alternative-text="Loading" variant="inverse"></lightning-spinner>
+                        </div>
+                    </template>
+                    <template if:false={loadingData}>
+                        <div class="search-table" style={styleHeight}>
+                                <c-product-selector-datatable 
+                                key-field="Id" 
+                                hide-checkbox-column 
+                                resize-column-disabled
+                                columns={columns} 
+                                suppress-bottom-bar 
+                                data={data} 
+                                errors={tableErrors}
+                                onaddrow={handleAddRow}>
+                            </c-product-selector-datatable>
+                            
+                            
+                            <template if:true={emptyDataList}>
+                                <div>
+                                    <p style="text-align: center;">No Records Found</p>
+                                </div>
+                            </template>
+                        </div>
+
+                        <!--<lightning-datatable
+                            key-field="id"
+                            data={data}
+                            hide-checkbox-column
+                            resize-column-disabled
+                            suppress-bottom-bar
+                            columns={columns}
+                            errors={tableErrors}>
+                        </lightning-datatable>-->
+                    </template>
+                </div>
+            </div>
+        </lightning-card>
+    </template>
+
+
+</template>

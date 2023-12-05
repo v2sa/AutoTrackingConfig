@@ -1,0 +1,23 @@
+.toggle-button {
+    position: absolute;
+    left: 34%;
+    top: 6%;
+}
+
+.platform-disabled{
+    background-color: lightgray;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.display{
+    display: unset;
+}
+
+.hide{
+    display: none;
+}
+
+.cell-disabled{
+    background-color: red;
+}

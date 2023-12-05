@@ -1,0 +1,86 @@
+<aura:component >
+    <aura:attribute name="selYearEstimatesTotalPerQuartList" type="List" access="public"/>
+    <aura:attribute name="prevYearActualsTotalPerQuartList" type="List" access="public"/>
+ 	<aura:attribute name="baseYearTotal" type="Decimal" access="public"/>
+    <aura:attribute name="prevToBYActualsTotal" type="Decimal" access="public"/>
+	<aura:attribute name="baseYear" type="Integer" access="public" default="0"/>
+    
+    <tr>           
+        <td style="max-width: 60px;width: 60px;">
+            <div style="width: 60px;display: inline-block;">
+                
+            </div>
+        </td>
+        <td style="min-width: unset; max-width: unset; width: unset;">
+            
+            <span><b>Total</b></span>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;"> 
+                <span><b>{!v.baseYear} : </b>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.baseYearTotal}" 
+                    style="decimal"/></span>
+            </div>  
+            <div style="height: 29px;line-height: 1.6rem;">
+                <span><b>{!v.baseYear - 1} : </b>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.prevToBYActualsTotal}" 
+                    style="decimal"/></span>
+            </div>
+            
+        </td>
+        <td>
+           	<div style="height: 26px;line-height: 1.6rem;font-weight: bold;">Selected Year
+            </div>
+            <div style="height: 29px;line-height: 1.6rem;font-weight: bold;">Previous Year
+            </div>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;"> 
+                <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.selYearEstimatesTotalPerQuartList[0]}" 
+                    style="decimal"/></span>
+            </div>  
+            <div style="height: 29px;line-height: 1.6rem;">
+                 <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.prevYearActualsTotalPerQuartList[0]}" 
+                    style="decimal"/></span>
+            </div>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;;"> 
+                <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.selYearEstimatesTotalPerQuartList[1]}" 
+                    style="decimal"/></span>
+            </div>  
+            <div style="height: 29px;line-height: 1.6rem;">
+                 <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.prevYearActualsTotalPerQuartList[1]}" 
+                    style="decimal"/></span>
+            </div>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;"> 
+                <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.selYearEstimatesTotalPerQuartList[2]}" 
+                    style="decimal"/></span>
+            </div>  
+            <div style="height: 29px;line-height: 1.6rem;">
+                 <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.prevYearActualsTotalPerQuartList[2]}" 
+                    style="decimal"/></span>
+            </div>
+        </td>
+        <td>
+            <div style="height: 26px;line-height: 1.6rem;"> 
+                <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.selYearEstimatesTotalPerQuartList[3]}" 
+                    style="decimal"/></span>
+            </div>  
+            <div style="height: 29px;line-height: 1.6rem;">
+                 <span>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                	value="{!v.prevYearActualsTotalPerQuartList[3]}" 
+                    style="decimal"/></span>
+            </div>
+        </td>
+    </tr>
+</aura:component>

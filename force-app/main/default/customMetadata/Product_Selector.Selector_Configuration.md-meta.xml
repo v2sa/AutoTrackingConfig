@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Selector Configuration</label>
+    <protected>false</protected>
+    <values>
+        <field>Brand_Options__c</field>
+        <value xsi:type="xsd:string">Brand
+Alpha Data
+Art Media
+BGR
+Billboard
+Deadline
+Dirt
+Fairchild Summits
+FN
+Gold Derby
+HollywoodLife
+Indiewire
+PMC Programmatic/Network Sales
+PressPass
+Robb Report
+Rolling Stone
+She Media
+Sourcing Journal
+Sportico
+Spy
+The Hollywood Reporter
+TVLine
+Variety
+Variety Conferences
+Variety Insight
+Vibe
+VIP
+WWD</value>
+    </values>
+    <values>
+        <field>Line_Item_Record_Type_Name__c</field>
+        <value xsi:type="xsd:string">Master</value>
+    </values>
+    <values>
+        <field>Pipeline_Product_Record_Type_Name__c</field>
+        <value xsi:type="xsd:string">Master</value>
+    </values>
+    <values>
+        <field>Record_Amount__c</field>
+        <value xsi:type="xsd:double">5.0</value>
+    </values>
+    <values>
+        <field>Selected_Products_Editable_Fields__c</field>
+        <value xsi:type="xsd:string">V2SACL1__Amount__c
+V2SACL1__Status__c
+V2SACL1__Start_Date__c
+V2SACL1__End_Date__c</value>
+    </values>
+    <values>
+        <field>Use_Pipeline_Line_Item_Record_Type_Value__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Use_Pipeline_Product_Record_Type_Values__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Use_User_Brands_Object__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+</CustomMetadata>

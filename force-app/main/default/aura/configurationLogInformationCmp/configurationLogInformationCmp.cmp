@@ -1,0 +1,282 @@
+<aura:component
+  implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId"
+  access="global">
+  <aura:attribute name="imagesUrl" type="String" default="" />
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+  <lightning:tabset variant="vertical">
+    <lightning:tab label="Home">
+      <div class="home-page">
+        <div class="headerDiv"
+          style="{!'background-image:' + 'url(' + v.imagesUrl + '/configurationLog_guide_images/806920_V2-Hero-Banner_081920.jpg);'}"
+          id="headerTitle">
+          <h1 class="titleHeader">Configuration Log</h1>
+          <div id="logoContainer" class="logo-container">
+            <a href="https://www.v2sa.com/">
+              <img class="logo-image" src="{!v.imagesUrl + '/configurationLog_guide_images/v2optimizedlogo.png'}" />
+            </a>
+          </div>
+        </div>
+        <div class="">
+          <h1 class="center-text">Welcome to the V2 Configuration Log!</h1>
+          <div class="description-context">
+            <p>With the V2 Configuration Log, System Admins can easily <span style="font-weight:bold;">track all changes
+                &amp;
+                modifications made in their Salesforce org.</span> Filter by component, date &amp; time and
+              user to create specific configuration reports that can be saved and downloaded.</p>
+            <p>Create project specific configuration logs or <span style="font-weight:bold;">search and access a detailed
+                log of all changes made within a Salesforce org.</span></p>
+            <p>For more information, see the User Guide and Dev Guide tabs or email <a
+                href="mailto:support@v2sa.com">support@v2sa.com</a>. </p>
+          </div>
+        </div>
+      </div>
+      <div id="footer" class="footer">
+
+      </div>
+    </lightning:tab>
+    <lightning:tab label="User Guide">
+      <div class="headerDiv"
+        style="{!'background-image:' + 'url(' + v.imagesUrl + '/configurationLog_guide_images/806920_V2-Hero-Banner_081920.jpg);'}">
+        <h1 class="titleHeader">User Guide</h1>
+        <div id="logoContainer" class="logo-container">
+          <a href="https://www.v2sa.com/">
+            <img class="logo-image" src="{!v.imagesUrl + '/configurationLog_guide_images/v2optimizedlogo.png'}"/>
+          </a>
+        </div>
+      </div>
+      <div class="scrolling">
+        <div id="componentsList">
+          <h2>Filter by Components List</h2>
+          <div class="spacingDiv">
+            <p class="spacing">The multi-select picklist is used to select the components that you want to retrieve.
+              <span style="color:red;">Only 3 components are supported for each search at a time.</span>
+              The following lines describe what is needed to add components:</p>
+            <ul>
+              <li class="listDecimal li-indenting">Select the components from the list on the left.</li>
+              <li class="listDecimal li-indenting">After selecting the component,click on the right arrow to select the
+                option. You can select
+                more than one option using the SHIFT or CMD button.</li>
+            </ul>
+            <div class="img-spacing">
+              <img style="height:300px;"
+                src="{!v.imagesUrl + '/configurationLog_guide_images/multiSelectPicklist.png'}" />
+            </div>
+          </div>
+
+        </div>
+        <div id="dateSearch">
+          <h2>Filter by Dates</h2>
+          <div class="spacingDiv">
+            <p class="spacing">In order to filter by dates the following must be done:</p>
+            <ul>
+              <li class="listDecimal li-indenting">Select "Created Date" or "Last Modified Date".</li>
+              <li class="listDecimal li-indenting">If "Start Date" set, the search wiill retrieve anything beyond that
+                date. The same
+                applies for "End Date".</li>
+              <li class="listDecimal li-indenting">If "Start Date" and "End Date" are set, the search will retrieve
+                anything between those
+                dates.</li>
+
+            </ul>
+            <div class="img-spacing">
+              <img style="height:200px;" src="{!v.imagesUrl   + '/configurationLog_guide_images/dateFilters.png'}" />
+            </div>
+          </div>
+        </div>
+        <div id="userSearch">
+          <h2>Filter by User Name</h2>
+          <div class="spacingDiv">
+            <p>This field is used as a filter to get components created or modified by the user selected. The fowllowing
+              lines help with the steps for the user filter:</p>
+            <ul>
+              <li class="listDecimal li-indenting">Click on the user input.</li>
+              <li class="listDecimal li-indenting">A list will be displayed with the first 5 users found.</li>
+              <li class="listDecimal li-indenting">If the user is not displayed in list, you can type for a specific
+                user name and the user will be displayed if found.</li>
+            </ul>
+          </div>
+          <div class="img-spacing">
+            <img style="height:100px;" src="{!v.imagesUrl  + '/configurationLog_guide_images/userInput.png'}" />
+          </div>
+        </div>
+        <div id="searchButton">
+          <h2>Search Button</h2>
+          <div class="spacingDiv">
+            <p>The search button will search for all components based on the criteria set to search.
+              Make sure to allways select at least one compnent from the list.</p>
+            <div class="img-spacing">
+              <img style="height:50px;" src="{!v.imagesUrl  + '/configurationLog_guide_images/searchButton.png'}" />
+            </div>
+          </div>
+          <h2>Save Button</h2>
+          <div class="spacingDiv">
+            <p>The save button will save a CSV file in the attachment section of the Configuration Log record with the
+              components searched for at the specific time of the search. The file will be saved in the Notes/Attachments related list with the following name convention:
+              (PROJECT NAME - COMPONENTS SELECTED - DATE TIME OF THE FILE)  i.e. <span class="bold-text"> TestProject - (ApexClass,ApexPage,Visualforce)-2020-01-14 14:00:00.csv </span>
+            </p>
+            <div class="img-spacing">
+              <img style="height:50px;" src="{!v.imagesUrl  + '/configurationLog_guide_images/saveButton.png'}" />
+            </div>
+          </div>
+        </div>
+        <div id="mergeDocumentation">
+          <h1>Package Merging</h1>
+          <p>The package merging tab is used to house the Datatable component where all the package.xml 
+            files that are saved on the Configuration Log record are shown. This tab is located in the Configuration Log lightning record page. Each row has a checkbox 
+            which you can click to select that particular package for merging. </p>
+          <div class="img-spacing">
+            <img style="height: 200px;" src="{!v.imagesUrl  + '/configurationLog_guide_images/packageMerging.png'}" />
+          </div>
+          <p>When done selecting the packages, press the Next button to begin the merging process.</p>
+          <div class="img-spacing">
+            <img style="height: 200px;" src="{!v.imagesUrl  + '/configurationLog_guide_images/selectedPackageFiles.png'}" />
+          </div>
+          <p>If a particular Configuration Log record has no package.xml files save a unique screen will be shown.</p>
+          <div class="img-spacing">
+            <img style="height: 100px;" src="{!v.imagesUrl  + '/configurationLog_guide_images/nopackageMergingRecords.png'}" />
+          </div>
+        </div>
+      </div>
+    </lightning:tab>
+    <lightning:tab label="Dev Guide">
+      <div class="headerDiv"
+        style="{!'background-image:' + 'url(' + v.imagesUrl + '/configurationLog_guide_images/806920_V2-Hero-Banner_081920.jpg);'}">
+        <h1 class="titleHeader">Developer Guide</h1>
+        <div id="logoContainer" class="logo-container">
+          <a href="https://www.v2sa.com/">
+            <img class="logo-image" src="{!v.imagesUrl + '/configurationLog_guide_images/v2optimizedlogo.png'}"/>
+          </a>
+        </div>
+      </div>
+      <div class="scrolling">
+        <h1>Requirements</h1>
+        <p>In order to be able to use the Configuration Log you have to do the following steps:</p>
+        <ul>
+          <li class="listDisc li-indenting">Create a remote site setting with your orgs instance. This <a
+              href="https://help.salesforce.com/articleView?id=configuring_remoteproxy.htm&amp;type=5">link</a> should
+            help with the creation of a remote site setting. The remote site should use the visual force page Salesforce url. Examples of this as follows:
+            <p>i.e. MyDomainName--PackageName.visualforce.com </p>
+            <p>i.e. MyDomainName--PackageName.InstanceName.visual.force.com</p>
+          </li>
+        </ul>
+        <h1>Components Implemented</h1>
+        <p>For any modification to components, the following list shows all the components used for the Configuration
+          Log implementation:</p>
+        <div id="customObjects">
+          <h2>Custom Objects</h2>
+          <ul>
+            <li class="listDisc li-indenting"><span class="bold-text">Configuration_Log__c</span> - This is the
+              object used
+              for saving the Configuration Log records. The records will contain information about the components as
+              well as attachments with the list of components searched.
+            </li>
+          </ul>
+        </div>
+        <div id="customMetadataTypes">
+          <h2>Custom Metadata Types</h2>
+          <ul>
+            <li class="listDisc li-indenting"><span class="bold-text">Configuration_Log_Configuration__mdt</span> - This custom
+              metadata type contains specific configuration parameters needed for the configuration log.
+              <ul>
+                <li class="listDisc li-indenting"><span class="bold-text">Component_List</span> - This is the record that contains the fields
+                  used in the configuration log tool.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div id="apexClasses">
+          <h2>Apex Classes</h2>
+          <ul>
+            <li class="listDisc li-indenting"><span class="bold-text">ConfigurationLogCmpController</span> - This is
+              the controller of the Lightning component for the Configuration Log.</li>
+            <li class="listDisc li-indenting"><span class="bold-text">ConfigurationLogCmpControllerTest</span> - Test
+              class to cover the Lightning component controller.</li>
+            <li class="listDisc li-indenting"><span class="bold-text">ConfigurationLogVFPageController</span> - This
+              is the controller for the Visualforce page that contains the Configuration Log component.</li>
+            <li class="listDisc li-indenting"><span class="bold-text">ConfigurationLogVFPageControllerTest</span> -
+              This is the test class for the Visualforce controller.</li>
+            <li class="listDisc li-indenting"><span class="bold-text">ConfigurationLogAttachmentsCmp</span> -
+                This class is the controller class for the ligtning component that controllers the attachments merging.</li> 
+            <li class="listDisc li-indenting"><span class="bold-text">ConfigurationLogHelper</span> -  This is the helper class for the Configuration Log Application.</li>
+            <li class="listDisc li-indenting"><span class="bold-text">ConfigurationLogHelperTest</span> - This is the test class for ConfigurationLogHelper class. </li>     
+            <li class="listDisc li-indenting"><span class="bold-text">MetadataService</span> - This class contains
+              the methods needed for the use of the Metadata API for the Configuration Log.</li>
+            <li class="listDisc li-indenting"><span class="bold-text">MetadataServiceTest</span> - This is the test
+              class for the MetadataService class.</li>
+            <li class="listDisc li-indenting"><span class="bold-text">MergePackage</span> - This class contains the methods for merging all package.xml files in the configuration log record.</li>
+            <li class="listDisc li-indenting"><span class="bold-text">MergePackageTest</span> - This is the test class for the MergePackage class.</li>
+           
+          </ul>
+        </div>
+        <div id="apexPages">
+          <h2>Apex Pages</h2>
+          <ul>
+            <li class="listDisc li-indenting"><span class="bold-text">ConfigurationLogVFAppPage</span> - This is the
+              Visualforce page that contains the Lightning component for the Configuration Log.</li>
+            <li class="listDisc li-indenting"><span class="bold-text">GeneratePDF</span> - This page is used for the
+              generation of the PDF from the Configuration Log.</li>
+          </ul>
+        </div>
+        <div id="lightningComponents">
+          <h2>Lightning Components</h2>
+          <ul>
+            <li class="listDisc li-indenting"><span class="bold-text">configurationLogApp</span> - This component is
+              the application referencing the Configuration Log lightning component.</li>
+            <li class="listDisc li-indenting"><span class="bold-text">configurationLogCmp</span> - This is the
+              component containing the Configuration Log.</li>
+            <li class="listDisc li-indenting"><span class="bold-text">configurationLogInformationCmp</span> - This
+              component contains all the information of the configuration tool.</li>
+            <li class="listDisc li-indenting"><span class="bold-text">datatableconfiglog</span> - This component is used for merging the package.xml files in the configuration log record.</li>
+            <li class="listDisc li-indenting"><span class="bold-text">reusableMultiSelectLookup</span> - This
+              component is used as the lookup in the Configuration Log.</li>
+            <li class="listDisc li-indenting"><span class="bold-text">reusableMultiselectLookupResult</span> - This
+              component is the result shown in the lookup.</li>
+            <li class="listDisc li-indenting"><span class="bold-text">selectedObjectRecordsEvent</span> - This is the
+              event used when selecting a record in the Configuration Log.</li>
+          </ul>
+        </div>
+        <div id="structure">
+          <h1>Implementation</h1>
+          <div class="img-spacing">
+            <img style="height: 400px;"
+              src="{!v.imagesUrl  + '/configurationLog_guide_images/DataFlowfortheConfigurationLog.png'}" />
+          </div>
+          <div class="">
+            <p>The following diagram demonstrates how the configuration log tool was built. This structure shows how the
+              data flows through the components.</p>
+            <p>The first to load is the visualforce, which is the parent component,
+              that contains the lightning components to render. Using Lightning Out,
+              the visualforce page passes attributes to the lightning component in order
+              for the lightning component to work properly. The lightning component loads
+              all the UI components and necessary data in order to properly be used.
+            </p>
+            <p>In order for the lightning component to generate the pdf, data is passed from the
+              component to the visualforce page, which calls an apex method in the visualforce apex
+              controller, then the controller sends the data to the generate pdf visualforce page for
+              the download to be completed.
+            </p>
+          </div>
+
+        </div>
+        <div id="references">
+          <h2>References / Ideas used for the build:</h2>
+          <ul>
+            <li class="listDecimal li-indenting"><a href="https://github.com/financialforcedev/apex-mdapi">Metadata
+                Service Implementation</a></li>
+            <li class="listDecimal li-indenting"><a
+                href="https://www.vermanshul.com/2017/07/lightning-generate-pdf-from-lightning.html">PDF Generation</a>
+            </li>
+            <li class="listDecimal li-indenting"><a
+                href="https://sfdcmonkey.com/2018/02/20/multi-select-lookup-salesforce-lightning/">Lookup Components</a>
+            </li>
+            <li class="listDecimal li-indenting"><a
+              href="https://unofficialsf.com/datatablev2-lightning-web-component-for-flow-screens/">Flow with Lightning Web Component</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </lightning:tab>
+  </lightning:tabset>
+</aura:component>

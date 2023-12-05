@@ -1,0 +1,26 @@
+<template>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large"
+        aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <lightning-button-icon variant="base" class="slds-modal__close" icon-name="utility:close"  alternative-text="Close" title="Close" onclick={closeModal}></lightning-button-icon>
+                <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Pipeline Product Search</h2>
+            </header>
+            <!--The content in the modal-->
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">   
+                <!--The productSearch component-->
+                <div>
+                    <c-product-search onclosemodalevt={closeModal} opportunity-id={recordId}></c-product-search>
+                </div>
+            </div>    
+            <footer class="slds-modal__footer ">
+                <div class="slds-align_absolute-center">
+                    <lightning-button label="Cancel" title="Cancel" onclick={closeModal} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button variant="brand" label="Save" title="Save" onclick={handleSave} class="slds-m-left_x-small"></lightning-button>
+                </div>
+                
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

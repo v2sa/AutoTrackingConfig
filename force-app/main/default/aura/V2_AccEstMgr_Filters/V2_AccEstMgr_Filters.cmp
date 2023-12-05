@@ -1,0 +1,25 @@
+<aura:component controller="V2_AccEstimatesManager"> 
+    <aura:attribute name="accListsOptions" type="List" />
+    <aura:attribute name="selAccList" type="String" default="My Estimated Accounts"/>   
+    <aura:handler event="c:V2_Util_ScriptsLoadedEvt" action="{!c.doInit}"/>
+    
+    <div style="margin: 1rem;padding:1rem;width: 60%;border: 1px solid rgb(217, 219, 221);display: inline-block;border-radius: .25rem;">        
+        <div class="slds-form--horizontal">
+            <lightning:combobox class="float-left width-100-perc" label="Select Account List:"
+                                aura:id="accListSel" name="accListSel"
+                                value="{!v.selAccList}"
+                                onchange="{!c.searchEstimatesByAccountFilter}"
+                                placeholder = ""
+                                options="{!v.accListsOptions}"/>
+            <label for="input-2" class="slds-form-element__label slds-no-flex" lightning-input_input="" style="padding-top: .58rem;">Search by Account Name:</label>
+            <div id="search-container" onkeyup="{!c.searchByEnter}">
+                <div id="search-div">
+                    <lightning:input placeholder="" class="text-filter" name="searchTxt" aura:id="searchTxt" label="Search by Account Name:"/>
+                </div>
+                <div id="search-icon-div">
+                    <lightning:icon class="search-icon" iconName="utility:search" size="x-small"/>
+                </div>
+            </div>
+        </div>        
+    </div>
+</aura:component>

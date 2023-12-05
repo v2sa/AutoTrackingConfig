@@ -1,0 +1,18 @@
+<template>
+    <div class="slds-form slds-form_stacked ">
+        <div class="lookup-container">
+            <c-v2-platform-program-lookup selection={initialSelection} errors={errors}
+            onsearch={handleSearch} onselectionchange={handleSelectionChange}
+            label="Search" placeholder="Search Products" is-multi-entry={isMultiEntry} opportunityid={opportunityid} platformname={platName}>
+            </c-v2-platform-program-lookup>
+            <!--<lightning-button variant="brand" label="Submit" onclick={handleSubmit}></lightning-button>-->
+        </div>
+
+        <!-- <div class="amount-container">
+            <lightning-input type="number" label="Total Amount" formatter="currency"
+            step="0.01" value="60000">
+            </lightning-input>
+        </div> -->
+        
+    </div>
+</template>

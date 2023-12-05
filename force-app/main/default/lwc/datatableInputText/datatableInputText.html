@@ -1,0 +1,36 @@
+<template>
+    <div class="inputDiv">
+        <template if:true={showInputField}>
+            <lightning-input 
+                type={typeName} 
+                name={name}
+                label={label} 
+                value={value} 
+                formatter={formatter} 
+                step={step}
+                onblur={handleOnBlur}
+                >
+
+            </lightning-input>
+        </template>
+        <!--Render picklist value if picklist-->
+        <template if:true={showPicklist}>
+            <div class="combobox-forground">
+                <lightning-combobox
+                name={name}
+                label={label}
+                value={value}
+                placeholder={placeholder}
+                options={picklistOptions}
+                onchange={handleChange}
+                >
+            </lightning-combobox>
+            </div>
+            
+        </template>
+        <!--This is to show the date when date is provided for an event-->
+        <template if:true={showFormattedDate}>
+            <lightning-formatted-date-time value={value}></lightning-formatted-date-time>
+        </template>
+    </div>
+</template>

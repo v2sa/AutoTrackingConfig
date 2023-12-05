@@ -1,0 +1,10 @@
+.lookup-container {
+    width: 40%;
+    display: inline-block;
+}
+
+.amount-container {
+    width: 20%;
+    display: inline-block;
+    position: absolute;
+}

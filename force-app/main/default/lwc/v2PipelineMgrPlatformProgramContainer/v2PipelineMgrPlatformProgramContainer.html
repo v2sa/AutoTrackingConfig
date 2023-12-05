@@ -1,0 +1,10 @@
+<template>
+    <div class="slds-form slds-form_stacked ">
+        <div class="lookup-container">
+            <c-v2-platform-program-lookup selection={initialSelection} errors={errors}
+            onsearch={handleSearch} onselectionchange={handleSelectionChange}
+            label="Search" placeholder="Search Products" is-multi-entry={isMultiEntry} opportunityid={opportunityid} platformname={platName}>
+            </c-v2-platform-program-lookup>
+        </div>
+    </div>
+</template>

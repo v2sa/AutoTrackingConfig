@@ -1,0 +1,13 @@
+<aura:component controller="V2_AccEstimatesManager" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <ltng:require scripts="{!$Resource.V2_Util_Lightning}" afterScriptsLoaded="{!c.doInit}"/>
+    <aura:registerEvent name="ScriptsLoadedEvent" type="c:V2_Util_ScriptsLoadedEvt" />
+    <aura:attribute name="defaultSettings" type="Integer"/>
+    
+    <div style="background-color: white !important; min-width: 900px! important;">
+        <lightning:layout>
+            <c:V2_AccEstMgr_Filters />
+            <c:V2_AccEstMgr_Totals defaultSettings="{!v.defaultSettings}" />            
+        </lightning:layout>
+        <c:V2_AccEstMgr_Table paginationSize="50" defaultSettings="{!v.defaultSettings}" />
+    </div>
+</aura:component>

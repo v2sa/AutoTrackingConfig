@@ -1,0 +1,59 @@
+.month-container {
+    width: 40px;
+    height: 30px;
+    margin: 0px;
+    display: inline-block;
+    border: 1px solid;
+    text-align: center;
+    padding: 4px;
+    border-radius: .25rem;
+
+    user-select: none;
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+}
+
+.unselectedDisabled {
+    border-color: #b2b2b2;
+    background-color: #ffffff;
+    color: #b2b2b2;
+    pointer-events:none;
+    cursor: no-drop;
+}
+
+.selectedDisabled {
+    border-color: #b2b2b2;
+    background-color: #cccccc;
+    color: #ffffff;
+    pointer-events:none;
+    cursor: no-drop;
+}
+
+.unselectedEnabled {
+    border-color: rgb(221, 219, 218);
+    background-color: #ffffff;
+    color: #2a77ce;
+    cursor: default;
+}
+
+.selectedEnabled {
+    /*border-color: #000000;*/
+    background-color: #2973d0;
+    color: #ffffff;
+    cursor: default;
+}
+
+.month-quarter {
+    margin-right: 10px;
+}
+
+div.unselectedEnabled:hover{
+    background-color: rgb(244, 246, 249);
+}
+
+
+div.selectedEnabled:hover{
+    background-color: rgba(0, 68, 135, 1);
+}

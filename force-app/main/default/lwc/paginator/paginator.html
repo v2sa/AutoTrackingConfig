@@ -1,0 +1,18 @@
+<template>
+    <br>
+    <lightning-layout>
+        <div class="center">
+            <p> 
+                <!-- Displaying {startingRecord} to {endingRecord} of {totalRecountCount} records | -->
+                <button onclick={previousHandler} style="border: none;">Previous</button>
+                <!-- <lightning-button style="width: 20px;height: 10px;" label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}></lightning-button> -->
+                | 
+                
+                Page {page} of {totalPage} | 
+                <!-- <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right" onclick={nextHandler}></lightning-button> -->
+                <button onclick={nextHandler} style="border: none;">Next</button>
+            </p>
+        </div>
+        
+    </lightning-layout>
+</template>

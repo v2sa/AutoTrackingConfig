@@ -1,0 +1,54 @@
+<aura:component controller="V2_AccEstimatesManager">
+    <aura:attribute name="accountIndex" type="integer"/>
+    <aura:attribute name="AEMWrapper" type="object"/>
+    <aura:attribute name="baseYear" type="Integer" access="public" default="0"/>
+
+    <aura:iteration items="{!v.AEMWrapper.totalsByChannel}" var="item" indexVar="index">
+        <tr style="background-color: rgb(248, 249, 251);">                 
+            <td style="max-width: 60px;width: 60px;">
+                <div style="width: 60px;display: inline-block;">
+                    
+                </div>
+            </td>
+            <td style="min-width: unset; max-width: unset; width: unset;">
+               {!item.channelName}
+            </td>
+            <td>
+                <div style="height: 26px;line-height: 1.6rem;"> 
+                    <span><b>{!v.baseYear} : </b>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                        value="{!item.baseYearTotal}" 
+                        style="decimal"/></span>
+                </div>  
+                <div style="height: 29px;line-height: 1.6rem;">
+                    <span><b>{!v.baseYear - 1} : </b>€<lightning:formattedNumber maximumFractionDigits = "0" 
+                        value="{!item.prevToBYActualsTotal}" 
+                        style="decimal"/></span>
+                </div>
+                
+            </td>
+            <td style="white-space: pre-wrap; word-break: break-all;">
+                <div style="height: 26px;line-height: 1.6rem;font-weight: bold;">Selected Year
+                </div>
+                <div style="height: 29px;line-height: 2.2rem;font-weight: bold;">Previous Year
+                </div>
+            </td>
+            <td>
+                <c:V2_AccEstMgr_TableQuarterEstimateRow accountIndex = "{!v.accountIndex}" AEMWrapper="{!v.AEMWrapper}" quarterIndex = "0" 
+                                                        channelIndex="{!index}" channelName="{!item.channelName}"/>                
+            </td>
+            <td>
+                <c:V2_AccEstMgr_TableQuarterEstimateRow accountIndex = "{!v.accountIndex}" AEMWrapper="{!v.AEMWrapper}" quarterIndex = "1" 
+                                                        channelIndex="{!index}" channelName="{!item.channelName}"/>
+            </td>
+            <td>
+                <c:V2_AccEstMgr_TableQuarterEstimateRow accountIndex = "{!v.accountIndex}" AEMWrapper="{!v.AEMWrapper}" quarterIndex = "2" 
+                                                        channelIndex="{!index}" channelName="{!item.channelName}"/>
+            </td>
+            <td>
+                <c:V2_AccEstMgr_TableQuarterEstimateRow accountIndex = "{!v.accountIndex}" AEMWrapper="{!v.AEMWrapper}" quarterIndex = "3" 
+                                                        channelIndex="{!index}" channelName="{!item.channelName}"/>
+            </td>
+   		</tr>
+    </aura:iteration>
+    
+</aura:component>

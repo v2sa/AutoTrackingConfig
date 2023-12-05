@@ -1,0 +1,23 @@
+.THIS td {
+    padding: 2px !important;
+}
+
+.THIS .collapsing-arrow {
+    width: 20px;
+    height: 30px;
+}
+
+.THIS td:first-of-type {
+	padding-left: 1rem !important;    
+}
+
+/* For Firefox browser */
+.THIS input[type='number'] {  
+   -moz-appearance:textfield;
+}
+/* For webkit browsers like Chrome and Safari */
+.THIS input[type=number]::-webkit-inner-spin-button,
+.THIS input[type=number]::-webkit-outer-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}

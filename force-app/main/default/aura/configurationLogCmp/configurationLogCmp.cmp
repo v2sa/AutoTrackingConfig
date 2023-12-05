@@ -1,0 +1,192 @@
+<aura:component controller="ConfigurationLogCmpController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <!--This is the list of components-->
+    <aura:attribute name="componentOptions" type="List" default="[]"/>
+    
+    <aura:attribute name="batchChecker" type="Boolean" default="false"/>
+    
+    <!--This is the radio option list-->                                                   
+    <aura:attribute name="radioOptions" type="List" default="[
+    {'label': 'Created Date', 'value': 'createdDate'},
+    {'label': 'Last Modified Date', 'value': 'lastModifiedDate'}
+    ]"/>
+
+    <!--Columns of the table-->
+    <aura:attribute name="columns" type="List"/>
+
+    <!--Data for the table-->
+    <aura:attribute name="data" type="List" default="[]"/>
+    
+    <!--This attribute is the JSON for the search criteria
+    This attribue will contain will be updated everytime a search criteria is added.-->
+    <aura:attribute name="jsonSearchCriteria" type="Map" default="{}"/>
+
+    <!--This is the selected records from the user input-->
+    <aura:attribute name="selectedLookUpRecords" type="sObject[]" default="[]"/>
+    <aura:attribute name="selectedConfigurationLogRecords" type="sObject[]" default="[]"/>
+
+    <!--Narrative attribute for the project-->
+    <aura:attribute name="projectNarrative" type="String" />
+
+    <!--The Configuration Log ID that was created this session-->
+    <aura:attribute name="created_id" type="String" default=""/>
+    
+    <!--The session Id passed to the configuration Log-->
+    <aura:attribute name="sessionId" type="String"/>
+    
+    <!-- The JavaScript Function from the VF Page -->
+    <aura:attribute name="printPDF" type="object"/>
+
+    <!--This is the error message from the component-->
+    <aura:attribute name="errorMessage" type="String"/>
+
+    <!--This attribute is for showing an error or success-->
+    <aura:attribute name="isSuccess" type="Boolean" default="false"/>
+
+    <!--This attribute is for setting the load when searching-->
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>  
+    
+    <!--This attribute is for disabling the saving button-->
+    <aura:attribute name="activeSave" type="Boolean" default="true"/> 
+    
+    <!--This attribute is for disabling the saving button-->
+    <aura:attribute name="activeBulkSave" type="Boolean" default="false"/> 
+    
+    <!--This attribute is for disabling the generate button-->
+    <aura:attribute name="activeGenerate" type="Boolean" default="true"/> 
+    
+    <!-- Event Change for the Configuration Log Selector -->
+    <aura:handler name="change" value="{!v.selectedConfigurationLogRecords}" action="{!c.handleConfigLogChange}"/>
+    
+    <!--This is the init action. Everything the component will do onload-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>  
+    
+    <lightning:card class="card" title="Configuration Log Search">
+        <!--Success or Error messages presented on the Component.
+        This is needed because the Visualforce pages using Lightning Out do not render toasts messages.-->
+        <div id="successMessage" aura:id="successMessage" class="successMessage">
+            <h2>SUCCESS: </h2>
+            <div class="slds-notify__close">
+                <lightning:buttonIcon iconName="utility:close"  
+                class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" 
+                variant="bare-inverse" 
+                title="Close" 
+                alternativeText="Close window"
+                onclick="{!c.handleSuccessClose}"/>
+            </div>
+            <h2>{!v.errorMessage}</h2>
+        </div>
+        <div id="warningMessage" aura:id="warningMessage" class="warningMessageStyle">
+            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                <span class="slds-assistive-text">error</span>
+                <span class="slds-icon_container slds-icon-utility-warning slds-m-right_x-small" title="Description of icon when needed">
+                    <h2>ERROR:</h2>
+                </span>
+                <h2>
+                    {!v.errorMessage}
+                </h2>
+                <div class="slds-notify__close">
+                    <lightning:buttonIcon iconName="utility:close"  
+                    class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" 
+                    variant="bare-inverse" 
+                    title="Close" 
+                    alternativeText="Close window"
+                    onclick="{!c.handleClose}"/>
+                </div>
+            </div>
+        </div>
+        <!--This is the download button on the lightning card-->
+        <aura:set attribute="actions">
+            <div id="downloadButtons" class="">
+                <lightning:button label="Download PDF" iconName="utility:download" iconPosition="left" onclick="{!c.downloadPDF}"/>
+            </div>
+        </aura:set>
+        <div class="positionComponents">
+            <!--Existent Configuration Log to save the PDF-->
+            <div class="projectSelection input-size-small">
+                <c:reusableMultiselectLookup aura:Id="projectName" objectAPIName="Configuration_Log__c"
+                            IconName="standard:settings"
+                            lstSelectedRecords="{!v.selectedConfigurationLogRecords}"
+                            label="Configuration Log"
+                            isOnlyOne="true"
+                />
+            </div>
+
+            <!--Project Narrative rich text-->
+            <h3 class="projectNarrativeLabel">Project Narrative</h3>
+            <lightning:inputRichText
+            class="projectNarrativeInput input-size-small" 
+            value="{!v.projectNarrative}" 
+            placeholder="Please Input a Project Narrative..."/>
+
+            <!--This is the criteria section for the search of the MetadataComponents-->
+            <div class="slds-section slds-is-open sectionStyle">
+                <h1 class="slds-section__title slds-theme_shade sectionTitle">
+                  <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Filters</span>
+                </h1>
+                <div aria-hidden="false" class="slds-section__content sectionContentStyle">
+                    <div id="searchCriteria" class="searchCriteria">
+                        <div class="slds-grid">
+                            <div class="slds-col">
+                                <div id="multiselectPicklist">
+                                    <lightning:dualListbox aura:id="componentList" name="components"
+                                                            label= "Select Components"
+                                                            sourceLabel="Available"
+                                                            selectedLabel="Selected"
+                                                            fieldLevelHelp="Select Components from list. You can only select 3 components at a time. For more information go to the information tab."
+                                                            onchange="{!c.handleComponentOnChange}"
+                                                            options="{!v.componentOptions}"/>
+                                </div>
+                                
+                            </div>
+                            <div class="slds-col searchOptions">
+                                <div id="radioOptions" class="radioOptions">
+                                    <lightning:radioGroup name="radioGroup"
+                                                            label="Dates"
+                                                            options="{! v.radioOptions }"
+                                                            type="radio"
+                                                            onchange="{!c.handleDateOnChange}"/>	
+                                </div>
+                                <div id="dateInputs" class="dateInputs">
+                                    <lightning:input aura:Id="startDate" class="slds-size_1-of-2 input-size-small" type="date" name="startDate" label="Start Date" onchange="{!c.handleSelectedDate}"/>
+                                    <lightning:input aura:Id="endDate" class="slds-size_1-of-2 input-size-small" type="date" name="endDate" label="End Date" onchange="{!c.handleSelectedDate}"/>
+                                </div>
+                                <div class="userInput">            
+                                    <c:reusableMultiselectLookup objectAPIName="user"
+                                    IconName="standard:people"
+                                    lstSelectedRecords="{!v.selectedLookUpRecords}"
+                                    label="User Name"
+                                    isOnlyOne="false"/>  
+                                </div>
+                            </div>
+                            <div class="slds-col buttonOptions">
+                                <div id="searchButton" class="buttonConfig">
+                                    <lightning:button variant="brand" label="Search" title="Search for Components" onclick="{! c.search }" />
+                                    <lightning:button variant="brand" label="Retrieve All Components" title="Retrieve All Components" onclick="{! c.bulkSave }" disabled="{!v.activeBulkSave}"/>
+                                    <lightning:button variant="brand" label="Save" title="Save Components" onclick="{! c.save }" disabled="{!v.activeSave}"/>
+                                    <lightning:button variant="brand" label="Generate Package" title="Generate Package.xml" onclick="{! c.generate_xml }" disabled="{!v.activeGenerate}" />
+                                </div>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--The table containing the components-->
+            <div id="componentTable" class="componentTable">
+                <aura:if isTrue="{!v.isLoading}">
+                    <div class="backgroundInverse">
+                        <lightning:spinner alternativeText="Loading" variant="inverse" />
+                    </div>
+                    <aura:set attribute="else">
+                        <lightning:datatable
+                            keyField="id"
+                            data="{! v.data }"
+                            columns="{! v.columns }"
+                            hideCheckboxColumn="true"/>
+                    </aura:set>
+                </aura:if>
+                
+                
+            </div>
+        </div>
+    </lightning:card>
+    </aura:component>

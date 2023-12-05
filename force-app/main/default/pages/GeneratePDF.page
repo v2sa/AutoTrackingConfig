@@ -1,0 +1,34 @@
+<apex:page renderAs="pdf" showHeader="false" applyHtmlTag="true" applyBodyTag="false" controller="ConfigurationLogVFPageController">
+    <head>
+        <apex:stylesheet value="{!URLFOR($Resource.stylesheet, '')}"/>
+    </head>
+       
+    <h1 class="titleHeader">
+        Configuration Log ({!configLogObject.Name})
+    </h1>
+    
+    <div class="m-bottom-20"><apex:outputText value="{!configLogObject.Description__c}" escape="false"/></div>
+    
+    <apex:outputPanel >
+        <apex:pageBlock > 
+            <!-- Iterate through the configLog(List<FilePropertiesWrapper>) -->       
+            <apex:pageBlockTable value="{!configLog}" var="config" styleClass="configTable" headerClass="tableHeader">           
+                <apex:column headerValue="Created By Id" value="{!config.createdById}" styleClass="tableDecor"/>        
+                <apex:column headerValue="Created By Name" value="{!config.createdByName}" styleClass="tableDecor"/> 
+                <div style="width: 100px;background-color: blue">
+                    <apex:column headerValue="Created Date" value="{!config.createdDate}" styleClass="tableDecor"/>  
+                </div>
+                <!--<apex:column headerValue="Created Date" value="{!config.createdDate}" styleClass="tableDecor"/> -->    
+                <apex:column headerValue="File Name" value="{!config.fileName}" styleClass="tableDecor" width="10px"/>     
+                <apex:column headerValue="Full Name" value="{!config.fullName}" styleClass="tableDecor"/>     
+                <apex:column headerValue="Id" value="{!config.id}" styleClass="tableDecor"/>     
+                <apex:column headerValue="Last Modified By Id" value="{!config.lastModifiedById}" styleClass="tableDecor"/>     
+                <apex:column headerValue="Last Modified By Name" value="{!config.lastModifiedByName}" styleClass="tableDecor"/>   
+                <apex:column headerValue="Last Modified Date" value="{!config.lastModifiedDate}" styleClass="tableDecor"/>   
+                <apex:column headerValue="Manageable State" value="{!config.manageableState}" styleClass="tableDecor"/>   
+                <apex:column headerValue="Namespace Prefix" value="{!config.namespacePrefix}" styleClass="tableDecor"/>   
+                <apex:column headerValue="Component Type" value="{!config.componentType}" styleClass="tableDecor"/> 
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:outputPanel>
+</apex:page>

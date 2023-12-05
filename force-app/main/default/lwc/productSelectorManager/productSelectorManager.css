@@ -1,0 +1,8 @@
+.scrolling-action {
+    max-height: 255px;
+    overflow-y: scroll;
+}
+
+.spacing-body {
+    padding-top: 30px;
+}

@@ -1,0 +1,50 @@
+.THIS .expand-all, .THIS .collapse-all {
+    height: 30px;
+}
+
+.THIS .expand-all {
+    margin-top: 1px;
+    margin-right: 10px;
+}
+
+.THIS .year-header {
+    display: inline-block;
+    line-height: 1.93rem;
+    height: 34px;
+    background-color: white;
+    border: 1px solid rgb(217, 219, 221);
+    text-align: center;
+}
+
+.THIS .total-labels {
+    display: block;
+    font-weight: bold;
+}
+
+.THIS .left-half {
+    min-width: 203px;
+    margin-right: 3%;
+    display: inline-block;
+  	vertical-align: top;
+  	width: 30%;
+}
+
+.THIS .right-half {
+    display: inline-block;
+  	vertical-align: top;
+  	width: 62%;
+}
+
+.THIS thead th:first-of-type {
+	padding-left: 1rem !important;    
+}
+
+@media only screen and (max-width: 795px) {
+    .THIS .left-half {
+        width: 90%;
+    }
+    
+    .THIS .right-half {
+        width: 90%;
+    }
+}

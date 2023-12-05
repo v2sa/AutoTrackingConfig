@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Invoked to let table component know it needs to reload">
+    <aura:attribute name="selectedAccountList" type="String"/>
+    <aura:attribute name="selectedAccountName" type="String"/>
+</aura:event>
